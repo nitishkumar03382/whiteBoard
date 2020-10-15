@@ -1,7 +1,7 @@
 import Point from './point.model.js';
 import {TOOL_BRUSH, TOOL_CIRCLE,TOOL_ERASER, TOOL_LINE,TOOL_PAINT_BUCKET,TOOL_TRIANGLE,TOOL_RECTANGLE,TOOL_PENCIL} from './tool.js';
 import {getMouseCoordsOnCanvas, findDistance} from './utility.js';
-import fill from './fill.class.js';
+import Fill from './fill.class.js';
 export default class Paint{
     constructor(canvasId){
         this.canvas = document.getElementById(canvasId);
@@ -41,7 +41,7 @@ export default class Paint{
         }
         else if(this.tool == TOOL_PAINT_BUCKET){
             //Fill color
-            new fill(this.canvas, this.startPos, this.color);
+            new Fill(this.canvas, this.startPos, this.color);
         }
     }
     onMouseMove(e){
