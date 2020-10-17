@@ -11,7 +11,24 @@ paint.init();
 document.querySelectorAll("[data-command]").forEach(
     item =>{
         item.addEventListener("click", e => {
-            console.log(item.getAttribute("data-command"));
+            let command =  item.getAttribute("data-command");
+            if(command === 'undo'){
+                paint.undoPaint();
+            }
+            else if(command === 'download'){
+                var canvas = document.getElementById("canvas");
+                var image = canvas.toDataURL("image/jpeg",1.0).replace("image/jpeg", "image/octet-stream");
+                var link = document.createElement("a");
+                let title = prompt("File name:");
+                if (title === null) {
+                    title = "my-image.jpeg";
+                } else {
+                    title += ".jpeg";
+                }
+                link.download = title;
+                link.href = image;
+                link.click();
+            }
         });
     }
 );
@@ -36,6 +53,7 @@ item => {
                 document.querySelector(".group.for-brush").style.display = "none";
                 break;
             case TOOL_BRUSH:
+            case TOOL_ERASER:
                 //activate brush line group
                 document.querySelector(".group.for-brush").style.display = "block";
                 // invisible shape linewidths group
